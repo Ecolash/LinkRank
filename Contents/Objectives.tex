@@ -1,0 +1,25 @@
+\section{Objectives}
+
+The main objective of this work is to develop a practical and effective framework for recovering one-to-many issue--commit traceability links. To this end, we present \emph{LinkRank}, a learning-to-rank formulation designed specifically for one-to-many issue--commit linking. In LinkRank each issue is treated as a query and candidate commits are ranked using a compact, interpretable feature blend: lexical similarity (TF--IDF with SVD) and retrieval-focused signals (BM25). Ranking is learned with a LambdaMART model and selection uses an iterative pick--remove--renormalize policy.\\
+
+\noindent
+In summary, this work contributes the following key items:
+
+\begin{enumerate}
+	\item \textit{One-to-many dataset.} We construct a new dataset by mining GitHub pull requests that are linked to \emph{exactly one} issue and contain \emph{two to six} commits, producing genuine one-to-many relations while avoiding degenerate or outlier cases. Careful filtering and repository-aware negative/false-link construction produce a realistic evaluation corpus and reduce ambiguity from multi-issue PRs.
+
+	\item \textit{LinkRank framework.} We cast linking as an issue-centric ranking task and learn a LambdaMART scorer over pairwise features: lexical similarity (TF--IDF{+}SVD) and retrieval focus (BM25). At inference, LinkRank \emph{picks} the top-scoring commit for an issue, \emph{removes} it, \emph{renormalizes} scores among the remaining candidates, and \emph{repeats}. Stopping can be performed with \emph{Known-$K$} (top-$K$) or \emph{Unknown-$K$} (ABS/REL thresholds).
+
+	\item \textit{Optional semantic embeddings.} We add CodeBERT-based semantic similarity as an optional feature channel to test robustness. The marginal improvements observed confirm that LinkRank’s performance is driven primarily by its ranking formulation and IR-style features, which keeps the method efficient and less dependent on transformers.
+
+	\item \textit{LinkRank-C2I variant.} We introduce a bidirectional refinement pipeline: first shortlist issues per commit (commit$\rightarrow$issue ranking), then validate from the issue side (issue$\rightarrow$commit re-ranking) using the same iterative selection policy. This cross-check improves precision while preserving recall and complements the primary formulation.
+
+	\item \textit{Issue-wise (macro) evaluation protocol.} For one-to-many linking we evaluate per-issue by comparing the predicted set $\widehat{\mathcal{C}}(i)$ to the gold set $\mathcal{C}^\star(i)$ using set-based Precision, Recall, and F1, and report macro averages across issues. This directly measures completeness and avoids the optimism of pairwise link-level scoring.
+\end{enumerate}
+
+These objectives frame the rest of the report: designing the dataset and feature set, implementing the LinkRank ranking and selection pipeline, evaluating optional semantic features, and validating the approach with a rigorous per-issue protocol to demonstrate its practical benefits for one-to-many issue--commit traceability recovery.
+
+
+
+
+

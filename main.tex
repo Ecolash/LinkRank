@@ -1,0 +1,327 @@
+\documentclass[11pt,english,a4paper]{article}
+%\usepackage{mylay} %User defined
+\usepackage[a4paper,
+left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
+\makeatletter
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{bbding}
+\usepackage{enumerate}
+\usepackage{color,soul}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+%\usepackage{hyperref}
+\usepackage{colortbl}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{multirow}
+%\usepackage{subcaption}
+\usepackage{capt-of}
+\usepackage{color,soul}
+\usetikzlibrary{fit,shapes.geometric}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{dblfloatfix} 
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{mdframed}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{enumerate}
+\usepackage{dblfloatfix} 
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{mdframed}
+\definecolor{mygray}{rgb}{0.8, 0.8, 0.8}
+\usepackage{float}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{svg}
+\usepackage{tabularx}
+
+\newcounter{nodemarkers}
+\newcommand\circletext[1]{%
+	\tikz[overlay,remember picture] 
+	\node (marker-\arabic{nodemarkers}-a) at (0,1ex) {};%
+	#1%
+	\tikz[overlay,remember picture]
+	\node (marker-\arabic{nodemarkers}-b) at (0,0){};%
+	\tikz[overlay,remember picture,inner sep=3pt]
+	\node[draw,ellipse,fit=(marker-\arabic{nodemarkers}-a.center) (marker-\arabic{nodemarkers}-b.center)] {};%
+	\stepcounter{nodemarkers}%
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=1.5pt] (char) {#1};}}
+
+\newcommand*\rectangle[1]{\tikz[baseline=(char.base)]{
+		\node[shape=rectangle,draw,inner xsep=1pt,inner ysep=0.8pt,align=left, minimum height=1em,] (char) {#1};}}
+\newcolumntype{M}{>{\centering\arraybackslash}m{\dimexpr.25\linewidth-2\tabcolsep}}
+
+
+
+
+\begin{document}
+	\thispagestyle{empty}
+\begin{titlepage}
+\begin{center}
+    \textbf{\fontsize{17.28pt}{14pt}\selectfont An Agentic AI Approach to End-to-End Bug Resolution} \\
+    \vspace{0.1in}
+    \fontsize{14pt}{14pt}\selectfont Integrating Issue-Commit Traceability, Explainability, and Automated Fixing\\
+    \vspace{0.6in}
+    {\fontsize{15pt}{14pt} \textbf{B.Tech Term Project-I Report \\}}        
+    \vspace{0.5in}
+    {\large\bf Submitted in Partial Fulfillment\\ of the Requirements for the Degree of}\\
+     \vspace{0.3in}
+     {\large\bf Bachelor of Technology (B.Tech)}\\
+     {\large\bf in}\\
+     {\large\bf Computer Science and Engineering (CSE)}\\     
+    \vspace{0.5in}
+    {\large\bf by}\\
+    \vspace{0.3in}
+    {\Large\bf Tuhin Mondal}\\
+    \vspace{0.1in}
+    {\Large\bf Roll Number: 22CS10087}\\
+    \vspace{0.05in}
+    {tuhin@kgpian.iitkgp.ac.in\\}
+    \vspace{0.5in}
+    {\large\bf Under the supervision of}\\
+    \vspace{0.2in}
+     {\Large\bf  Prof. Partha Pratim Chakrabarti}\\
+    \vspace{0.1in}
+    {\large\bf Department of Computer Science and Engineering}\\
+    {\large\bf Indian Institute of Technology Kharagpur}\\  
+    \vspace{0.05in}
+    {ppchak@cse.iitkgp.ac.in}\\
+    
+    \vspace{0.2in}
+    \begin{center}
+        \includegraphics[width=1.5in]{Figures/logo.png}
+    \end{center}
+    \vspace{0.2in}
+    {\Large\textbf{Department of Computer Science and Engineering,}}\medskip\\
+    {\Large\textbf{Indian Institute of Technology Kharagpur}}\medskip\\
+    {\large\textbf{November 2025}}
+\end{center}
+\end{titlepage}
+
+\newpage
+\begin{center}
+    {\Large\textbf{DECLARATION}}\\[0.4in]
+\end{center}
+
+I certify that
+
+\begin{enumerate}
+    \item The work contained in this report has been done by me under the guidance of my supervisor.
+    \item The work has not been submitted to any other Institute for any degree or diploma.
+    \item I have conformed to the norms and guidelines given in the Ethical Code of Conduct of the Institute.
+    \item Whenever I have used materials (data, theoretical analysis, figures, and text) from other sources, I have given due credit to them by citing them in the text of the thesis and giving their details in the references. Further, I have taken permission from the copyright owners of the sources, whenever necessary.
+\end{enumerate}
+\vspace{3in}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+Date: November 5, 2025 \\
+Place: Kharagpur
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{flushright}
+\textbf{Tuhin Mondal}\\
+(22CS10087)
+\end{flushright}
+\end{minipage}
+
+\newpage
+\begin{center}
+    {\Large\textbf{Certificate}}\\[0.4in]
+\end{center}
+
+This is to certify that the work presented in this report entitled \textbf{``An Agentic AI Approach to End-to-End Bug Resolution: Integrating Issue–Commit Traceability, Explainability, and Automated Fixing''}, submitted by \textbf{Tuhin Mondal}, Roll Number \textbf{22CS10087}, has been carried out under my supervision in partial fulfillment of the requirements for the degree of \textbf{Bachelor of Technology in Computer Science and Engineering} at the \textbf{Department of Computer Science and Engineering, Indian Institute of Technology Kharagpur}.\\
+
+\vspace{0.1in}
+
+The work embodied in this report is a bonafide record of the student’s original contribution to the research carried out under my guidance. To the best of my knowledge, the work reported herein has not been submitted for the award of any other degree or diploma of this or any other institute.
+
+\vspace{4in}
+
+\begin{flushright}
+\textbf{Prof.\ Partha Pratim Chakrabarti}\\
+Supervisor\\
+Department of Computer Science and Engineering\\
+Indian Institute of Technology Kharagpur\\
+Email: ppchak@cse.iitkgp.ac.in
+\end{flushright}
+
+\vspace{0.8in}
+\noindent
+Date: November 2025 \hfill Place: IIT Kharagpur
+
+% \newpage
+
+% {\hspace{6cm}\Large {\bf Certificate}} \newline
+% This is to certify that the work presented in this report entitled ``Smart Software Bug Management using Issue-Commit Analysis'', submitted by Abhishek Kumar, having examination roll number 20CS91R02, has been carried out under our supervision for the partial fulfillment of the  requirements for the degree of {\em Doctor of Philosophy
+% }in the Department of Computer Science and Engineering, IIT Kharagpur.
+
+% \vspace*{0.9cm}
+
+% \begin{flushleft}
+
+% 	\hspace{6cm} --------------------------------------- \\ \hspace{6.6cm}
+%  	Prof. Arobinda Gupta \\ \hspace{6.3cm} (Head of Department, CSE)
+% \end{flushleft}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Dr. Partha Pratim Das  \hfill Prof. Partha Pratim Chakrabarti \\ (Supervisor) \hfill (Joint supervisor)
+% 	\hfill  \\
+% 	%\linebreak
+% \end{flushleft}
+
+% \vspace{0.5cm}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Prof.  Jayanta Mukhopadhyay  \hfill Prof. Rajib Mall \\ (DSC Chairman) \hfill (DSC Member)
+% 	\linebreak
+% \end{flushleft}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Dr. Soumya Kanti Ghosh  \hfill Dr. Santanu Chattopadhyay \\
+% 	(DSC Member) \hfill (DSC Member) 
+% 	\linebreak
+% \end{flushleft}
+
+
+
+% \vspace{4 cm}
+% \begin{flushright}
+% 	---------------------- \\
+% 	Date \enspace \enspace \enspace \enspace 
+	
+% \end{flushright}
+
+
+% {\hspace{6cm}\Large {\bf Certificate}} \newline
+% This is to certify that the work presented in this report entitled ``Smart Software Bug Management using Issue-Commit Analysis'', submitted by Abhishek Kumar, having examination roll number 20CS91R02, has been carried out under our supervision for the partial fulfillment of the  requirements for the degree of {\em Doctor of Philosophy
+% }in the Department of Computer Science and Engineering, IIT Kharagpur.
+
+% \vspace*{0.9cm}
+
+% \begin{flushleft}
+
+% 	\hspace{6cm} --------------------------------------- \\ \hspace{6.6cm}
+%  	Prof. Arobinda Gupta \\ \hspace{6.3cm} (Head of Department, CSE)
+% \end{flushleft}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Dr. Partha Pratim Das  \hfill Prof. Partha Pratim Chakrabarti \\ (Supervisor) \hfill (Joint supervisor)
+% 	\hfill  \\
+% 	%\linebreak
+% \end{flushleft}
+
+% \vspace{0.5cm}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Prof.  Jayanta Mukhopadhyay  \hfill Prof. Rajib Mall \\ (DSC Chairman) \hfill (DSC Member)
+% 	\linebreak
+% \end{flushleft}
+
+% \begin{flushleft}
+% 	------------------------------------ \hfill ------------------------------------  \\
+% 	Dr. Soumya Kanti Ghosh  \hfill Dr. Santanu Chattopadhyay \\
+% 	(DSC Member) \hfill (DSC Member) 
+% 	\linebreak
+% \end{flushleft}
+
+
+
+% \vspace{4 cm}
+% \begin{flushright}
+% 	---------------------- \\
+% 	Date \enspace \enspace \enspace \enspace 
+	
+% \end{flushright}
+
+\newpage
+\begin{center}
+    {\Large\textbf{ABSTRACT}}\\[0.2in]
+\end{center}
+
+\noindent
+\rule{\textwidth}{0.4pt}\\[6pt]
+% \textbf{Name of the student:} Tuhin Mondal\\
+% \textbf{Roll No: } 22CS10087\\
+\textbf{Degree for which submitted:} Bachelor of Technology (B.Tech)\\
+\textbf{Department:} Department of Computer Science and Engineering (CSE)\\
+\textbf{Thesis title:} \textit{An Agentic AI Approach to End-to-End Bug Resolution}\\
+\textbf{Thesis supervisor:} Professor Partha Pratim Chakrabarti\\
+\textbf{Month and year of thesis submission:} October 30, 2025\\[6pt]
+\rule{\textwidth}{0.4pt}
+
+\vspace{0.2in}
+
+\noindent
+Modern bug fixing and resolution presents a complex, multi-stage challenge that ideally moves from identifying connections to understanding their meaning and, finally, to acting upon them. This flow can be conceptualized in three critical stages: \textbf{Traceability} (recovering links between artifacts), \textbf{Explainability} (understanding an issue's root cause and its fix), and \textbf{Resolution} (autonomously suggesting fixes). The growing impact of \textbf{agentic AI}, where autonomous agents collaborate to solve complex problems, offers a powerful new paradigm to address this entire lifecycle. However, any such intelligent system must be built upon a robust foundation of accurate \textbf{traceability}. This thesis provides a comprehensive solution for that foundational first stage.\\
+
+Recovering \textbf{traceability} links between issues and commits is a fundamental requirement for effective software maintenance, comprehension, and analytics. This \textbf{traceability} provides a crucial foundation for understanding the context and rationale behind code modifications, enabling developers to navigate project history and make informed decisions. By connecting issues to the full set of commits that resolve them, teams can better perform impact analysis, manage bug fixes, and track feature progression, ultimately enhancing software quality and streamlining maintenance workflows. However, the vast majority of existing research and automated models for \textbf{issue-commit link recovery} have restricted the problem to simplified \textbf{one-to-many} mappings. This simplification overlooks the common and complex reality of large-scale development, where a single issue is often resolved through multiple distinct commits. To address this critical gap, we propose \textbf{LinkRank}, a novel \textbf{learning-to-rank} framework that formulates \textbf{one-to-many} issue-commit recovery as a ranking problem. \textbf{LinkRank} integrates lightweight lexical and retrieval-based representations with a \textbf{LambdaMART} ranker and employs an iterative selection mechanism to identify the complete set of relevant commits. To enable systematic evaluation, we construct a novel \textbf{dataset} that explicitly captures these \textbf{one-to-many} relationships. Extensive experiments demonstrate that \textbf{LinkRank} substantially outperforms existing baselines, establishing a robust and scalable paradigm for practical \textbf{traceability}.\\
+
+While this work establishes a high-performance foundation for \textbf{traceability}, the subsequent phases of the development lifecycle—\textbf{Explainability} and \textbf{Resolution}—are envisioned as fast follow-ups that build directly on this foundational stage. The \textbf{LinkRank} framework provides the necessary groundwork for these future steps. Future work can leverage these accurate \textbf{one-to-many} links to build models that analyze the linked issue and commits to generate natural-language explanations of the problem's root cause and the applied solution, moving closer to a fully integrated bug management system.\\
+\vspace{0.2in}
+
+\textbf{Keywords:} \textbf{Agentic AI}, \textbf{Large Language Models}, \textbf{Issue–Commit Traceability}, \textbf{Explainability}, \textbf{Automated Bug Resolution}
+
+\newpage
+\tableofcontents
+
+\newpage
+\listoffigures
+\vspace{6pt}
+\listoftables
+
+\newpage
+\input{Contents/Introduction.tex}
+\input{Contents/Motivation.tex}
+\input{Contents/Objectives.tex}
+\input{Contents/Literature Review.tex}
+\newpage
+\input{Contents/Summary of Work Done.tex}
+\input{Contents/Experimental Setup.tex}
+\input{Contents/Results.tex}
+\input{Contents/Conclusion.tex}
+\input{Contents/Dissemination.tex}
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+\end{document}

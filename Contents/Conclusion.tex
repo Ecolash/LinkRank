@@ -1,0 +1,33 @@
+\section{Conclusion and Future Work}
+
+Modern software maintenance is hampered by the disconnect between issue reports and the corresponding code changes. This thesis presented the vision for an end-to-end, Agentic AI-driven bug resolution system, conceptualized as a three-stage pipeline: \textbf{Traceability} $\rightarrow$ \textbf{Explainability} $\rightarrow$ \textbf{Resolution}. Such a system promises to automate the entire lifecycle of a bug, from identification to a verified fix. However, the efficacy of the entire pipeline is critically dependent on the quality of its foundation: accurately tracing which commits resolve which issues.\\
+
+\noindent
+The central challenge, and the primary focus of this thesis, was that existing traceability research has largely overlooked the common and complex reality of \textit{one-to-many} relationships, where a single issue is resolved by multiple, distinct commits. This gap renders most automated tools insufficient for grounding the high-level reasoning required by an intelligent agent.
+
+\subsection*{Summary of Contributions}
+
+This work successfully addressed this foundational problem by designing, implementing, and evaluating \textbf{LinkRank}, a novel learning-to-rank framework specifically engineered for the one-to-many issue-commit recovery task. The key contributions of this thesis are:
+
+\begin{enumerate}
+    \item \textbf{A Novel One-to-Many Dataset:} We constructed a new, large-scale dataset from diverse GitHub repositories that explicitly captures genuine one-to-many issue-commit relationships, derived from pull request data. This provides a robust corpus for training and evaluating models on this complex task.
+
+    \item \textbf{The LinkRank Framework:} We formulated issue-commit linking as a ranking problem, a more natural fit for this task than binary classification. LinkRank employs a \textbf{LambdaMART} ranker over a lightweight and effective feature set, combining lexical signals (TF-IDF+SVD) and retrieval-focused matching (BM25).
+
+    \item \textbf{Iterative Selection Strategies:} We introduced practical selection mechanisms (\texttt{Unknown-K ABS} and \texttt{REL}) that allow the model to autonomously determine the complete set of relevant commits for an issue without prior knowledge of the set's size.
+
+    \item \textbf{Comprehensive Evaluation:} Extensive experiments demonstrated that both LinkRank and its bidirectional variant, LinkRank-C2I, \textbf{substantially outperform} existing baseline methods by a large margin (over 25-35 F1 points). Our results also confirmed that the lightweight IR features provide the vast majority of the performance, making LinkRank both effective and computationally efficient.
+\end{enumerate}
+
+\subsection*{Future Work: Building the Agentic Pipeline}
+
+This thesis has successfully established the first and most critical pillar of the proposed agentic system. By providing a high-fidelity traceability layer, we have laid the necessary groundwork for the subsequent phases of Explainability and Resolution. Future work will build directly upon the accurate one-to-many links recovered by LinkRank.
+
+    \paragraph{Phase 2: Explainability:} The next logical step is to move from \textit{what} (the links) to \textit{why} (the rationale). We envision a new model, likely a fine-tuned Large Language Model or a similar architecture, that takes an issue description and the complete set of its resolving commits (as identified by LinkRank) as input. Its goal would be to analyze the code diffs in the context of the issue and generate a concise, natural-language explanation of the bug's root cause and the logic of the applied multi-commit solution. The main goal of Explainability is to identify and reason which code changes contribute to which aspects of the issue resolution, thereby providing human-understandable justifications for the automated fixes.
+
+    \paragraph{Phase 3: Resolution:} With a comprehensive understanding of issues, linked commits, and their explanations, the final stage is to build an autonomous resolution agent. This agent would leverage the patterns learned in the first two phases to address new, unseen issues. Given a new bug report, the agent would first retrieve similar explained-and-resolved issues, then reason about the context of the new bug, and finally \textbf{propose candidate code patches} or even a sequence of commits to resolve it. This could involve generating code diffs directly or suggesting modifications to existing code, effectively closing the loop from issue identification to autonomous resolution.
+
+    \paragraph{Full Integration:} The ultimate goal is to integrate all three components---Traceability (LinkRank), Explainability (LLM-based rationale generation), and Resolution (patch generation)---into a single, closed-loop Agentic AI framework. This system would be powerful enough to automatically trigger on new issues, trace the relevant commits, explain the reasoning, and propose fixes with minimal human intervention, revolutionizing the software maintenance landscape.\\
+
+
+In conclusion, this work has solved a long-standing and critical gap in software traceability. By delivering a robust solution for the one-to-many linking problem, this thesis provides the indispensable foundation required to build the next generation of truly intelligent and autonomous software maintenance agents.
