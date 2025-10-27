@@ -1,0 +1,28 @@
+\begin{center}
+    {\Large\textbf{ABSTRACT}}\\[0.2in]
+\end{center}
+
+\noindent
+\rule{\textwidth}{0.4pt}\\[6pt]
+% \textbf{Name of the student:} Tuhin Mondal\\
+% \textbf{Roll No: } 22CS10087\\
+\textbf{Degree for which submitted:} Bachelor of Technology (B.Tech)\\
+\textbf{Department:} Department of Computer Science and Engineering (CSE)\\
+\textbf{Thesis title:} \textit{An Agentic AI Approach to End-to-End Bug Resolution}\\
+\textbf{Thesis supervisor:} Professor Partha Pratim Chakrabarti\\
+\textbf{Month and year of thesis submission:} October 30, 2025\\[6pt]
+\rule{\textwidth}{0.4pt}
+
+\vspace{0.2in}
+
+\noindent
+Modern bug fixing and resolution presents a complex, multi-stage challenge that ideally moves from identifying connections to understanding their meaning and, finally, to acting upon them. This flow can be conceptualized in three critical stages: \textbf{Traceability} (recovering links between artifacts), \textbf{Explainability} (understanding an issue's root cause and its fix), and \textbf{Resolution} (autonomously suggesting fixes). The growing impact of \textbf{agentic AI}, where autonomous agents collaborate to solve complex problems, offers a powerful new paradigm to address this entire lifecycle. However, any such intelligent system must be built upon a robust foundation of accurate \textbf{traceability}. This thesis provides a comprehensive solution for that foundational first stage.\\
+
+Recovering \textbf{traceability} links between issues and commits is a fundamental requirement for effective software maintenance, comprehension, and analytics. This \textbf{traceability} provides a crucial foundation for understanding the context and rationale behind code modifications, enabling developers to navigate project history and make informed decisions. By connecting issues to the full set of commits that resolve them, teams can better perform impact analysis, manage bug fixes, and track feature progression, ultimately enhancing software quality and streamlining maintenance workflows. However, the vast majority of existing research and automated models for \textbf{issue-commit link recovery} have restricted the problem to simplified \textbf{one-to-many} mappings. This simplification overlooks the common and complex reality of large-scale development, where a single issue is often resolved through multiple distinct commits. To address this critical gap, we propose \textbf{LinkRank}, a novel \textbf{learning-to-rank} framework that formulates \textbf{one-to-many} issue-commit recovery as a ranking problem. \textbf{LinkRank} integrates lightweight lexical and retrieval-based representations with a \textbf{LambdaMART} ranker and employs an iterative selection mechanism to identify the complete set of relevant commits. To enable systematic evaluation, we construct a novel \textbf{dataset} that explicitly captures these \textbf{one-to-many} relationships. Extensive experiments demonstrate that \textbf{LinkRank} substantially outperforms existing baselines, establishing a robust and scalable paradigm for practical \textbf{traceability}.\\
+
+While this work establishes a high-performance foundation for \textbf{traceability}, the subsequent phases of the development lifecycle—\textbf{Explainability} and \textbf{Resolution}—are envisioned as fast follow-ups that build directly on this foundational stage. The \textbf{LinkRank} framework provides the necessary groundwork for these future steps. Future work can leverage these accurate \textbf{one-to-many} links to build models that analyze the linked issue and commits to generate natural-language explanations of the problem's root cause and the applied solution, moving closer to a fully integrated bug management system.\\
+\vspace{0.2in}
+
+\textbf{Keywords:} \textbf{Agentic AI}, \textbf{Large Language Models}, \textbf{Issue–Commit Traceability}, \textbf{Explainability}, \textbf{Automated Bug Resolution}
+
+\newpage
