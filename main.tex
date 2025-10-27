@@ -66,10 +66,52 @@ left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 \usepackage{svg}
 \usepackage{tabularx}
 
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  filecolor=blue,
+  urlcolor=blue
+}
+% Make only the table of contents use black internal links:
+\AtBeginDocument{%
+  \let\oldtableofcontents\tableofcontents
+  \renewcommand{\tableofcontents}{%
+  \hypersetup{linkcolor=black}% TOC entries black
+  \oldtableofcontents
+  \hypersetup{linkcolor=blue}% restore original color for the rest
+  }%
+}
+
 \newcounter{nodemarkers}
 \newcommand{\preamble}[1]{%
   \newpage
   \input{Contents/Preambles/#1.tex}%
+}
+
+\definecolor{noteBG}{RGB}{255,247,230}
+\definecolor{noteRule}{RGB}{255,171,64}
+\definecolor{noteTitleBG}{RGB}{255,233,190}
+
+\newenvironment{nicebox}[1][Note]{%
+  \begin{mdframed}[
+    backgroundcolor=noteBG,
+    linecolor=noteRule,
+    linewidth=1pt,
+    roundcorner=6pt,
+    innertopmargin=6pt,
+    innerbottommargin=6pt,
+    innerleftmargin=10pt,
+    innerrightmargin=10pt,
+    skipabove=\baselineskip,
+    skipbelow=\baselineskip,
+    frametitle={\strut\textbf\fontsize{10px}{12pt}{#1}},
+    frametitlefont=\normalfont\small\bfseries,
+    frametitlebackgroundcolor=noteTitleBG
+  ]%
+}{%
+  \end{mdframed}%
 }
 
 \begin{document}
@@ -94,12 +136,22 @@ left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 \input{Contents/Motivation.tex}
 \input{Contents/Objectives.tex}
 \input{Contents/Literature Review.tex}
-\newpage
 \input{Contents/Summary of Work Done.tex}
 \input{Contents/Experimental Setup.tex}
 \input{Contents/Results.tex}
-\input{Contents/Conclusion.tex}
+\input{Contents/Conclusion and Future Work.tex}
 \input{Contents/Dissemination.tex}
+
+\begin{center}
+\begingroup
+\setlength{\fboxsep}{6pt}% adjust padding as needed
+\fbox{%
+    \begin{minipage}{\linewidth}
+        \textbf{Data Availability Statement:} The code and data are available in the following repo: \href{https://github.com/merealone2516/LinkRank}{LinkRank}
+    \end{minipage}%
+}
+\endgroup
+\end{center}
 
 \newpage
 \bibliographystyle{IEEEtran}

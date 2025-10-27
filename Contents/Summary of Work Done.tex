@@ -13,7 +13,7 @@ Our approach is organized into four phases. The complete workflow is illustrated
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.98\textwidth]{figures/App.png}
+    \includegraphics[width=\textwidth]{figures/App.png}
     \caption{Overall workflow of the proposed LINKRANK framework}
     \label{fig:approach}
 \end{figure}
@@ -230,10 +230,9 @@ Together, these strategies allow us to contrast oracle-based performance (Known-
 
 \subsection{Phase V: Bidirectional Variant: LinkRank-C2I}
 
-In addition to our primary framework, \textsc{LinkRank}, which adopts an issue-centric perspective, we also experimented with a variant called \textsc{LinkRank-C2I} (commit$\rightarrow$issue). The motivation is to provide a complementary view by reversing the linking perspective. Since issue--commit relationships are inherently bidirectional, examining the task from the commit side lets us study whether different linking dynamics emerge when commits are treated as queries, and it further enables a consistency check between both directions, as detailed in Algorithm~\ref{algo_2}.
+In addition to our primary framework, \textsc{LinkRank}, which adopts an issue-centric perspective, we also experimented with a variant called \textsc{LinkRank-C2I} (commit$\rightarrow$issue). The motivation is to provide a complementary view by reversing the linking perspective. Since issue--commit relationships are inherently bidirectional, examining the task from the commit side lets us study whether different linking dynamics emerge when commits are treated as queries, and it further enables a consistency check between both directions, as detailed in Algorithm~\ref{algo_2}.\\
 
-
-
+\noindent
 \textbf{Step 1: Commit-to-Issue Retrieval.}\ \
 Each commit $c \in \mathcal{C}$ is treated as a query and issues $i \in \mathcal{I}$ are candidates. Feature representations (TF--IDF+SVD, BM25, and optional CodeBERT) are computed exactly as in \textsc{LinkRank}, but tuples are grouped by \textbf{commit} for training. A LambdaMART ranker $\mathcal{R}_{A2}$ learns to score candidate issues:
 \[
@@ -245,6 +244,7 @@ where $x_{c,i}$ is the feature vector for commit $c$ and issue $i$. To restrict 
 \]
 (Optionally, a BM25 guard can expand the candidate set with a few high-recall issues per commit.)
 
+\noindent
 \textbf{Step 2: Issue-to-Commit Validation.}\ \
 We then reintroduce the issue-centric view of \textsc{LinkRank}. For each issue $i$, we restrict its candidate pool to those commits that shortlisted $i$ in Step~1:
 \[
@@ -254,14 +254,13 @@ The Issue-to-Commit ranker $\mathcal{R}_{A1}$ (trained by grouping tuples \textb
 \[
 s(i,c) = \mathcal{R}_{A1}(x_{i,c}), \quad c \in \mathcal{P}(i).
 \]
-This cross-directional gating enforces agreement between the commit$\rightarrow$issue and issue$\rightarrow$commit views.
+This cross-directional gating enforces agreement between the commit$\rightarrow$issue and issue$\rightarrow$commit views.\\
 
 % typically reducing false positives while preserving recall.
 
+\noindent
 \textbf{Selection Strategies.}\ \
-We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, and Unknown-$K$ REL) with the same \emph{iterative} procedure: pick the current best commit for $i$, remove it from $\mathcal{P}(i)$, recompute per-issue normalization (min--max $\tilde{s}$) and the updated $s_{\max}(i)$, and continue until the stopping rule is met.
-
-In summary, \textsc{LinkRank-C2I} complements the primary approach by enforcing bidirectional consistency, typically reducing false positives while preserving recall.
+We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, and Unknown-$K$ REL) with the same \emph{iterative} procedure: pick the current best commit for $i$, remove it from $\mathcal{P}(i)$, recompute per-issue normalization (min--max $\tilde{s}$) and the updated $s_{\max}(i)$, and continue until the stopping rule is met. In summary, \textsc{LinkRank-C2I} complements the primary approach by enforcing bidirectional consistency, typically reducing false positives while preserving recall.
 
 
 

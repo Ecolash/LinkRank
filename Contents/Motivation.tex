@@ -10,33 +10,32 @@ By prioritizing traceability, we provide a reliable foundation for higher-level 
 
 \subsection{The core problem: a gap in existing research}
 
-Despite substantial prior work—from early heuristics and IR-based heuristics to modern machine learning and deep models—existing approaches predominantly assume a one-to-one mapping between an issue and a single commit~\cite{r17,r19,r20,r7,r31}. This simplifying assumption overlooks three important realities:
+Despite substantial prior work—from early heuristics and IR-based heuristics to modern machine learning and deep models—existing approaches predominantly assume a one-to-one mapping between an issue and a single commit~\cite{r17,r19,r20,r7}. This simplifying assumption overlooks three important realities:
 
-\begin{enumerate}[a)]
-	\item \textbf{Prevailing assumption: one-to-one issue--commit mappings.} Many automated methods are designed and evaluated under the assumption that each issue corresponds to a single commit. This simplifies modeling and evaluation but does not align with real development processes.
-	
-
-	\item \textbf{Prevalence of one-to-many relationships.} In practical development workflows a single issue—especially complex bugs or multi-step feature work—is often resolved through multiple commits (incremental fixes, follow-ups, or refactors)~\cite{r7,r17}. These one-to-many patterns are common in large and actively maintained projects.
-	
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.98\textwidth]{Figures/issue-pr-demo-example.png}
+        \includegraphics[width=0.95\textwidth]{Figures/issue-pr-demo-example.png}
         \captionsetup{font={small,it},justification=centering}
         \caption{A Practical Example of a One-to-Many Issue--Commit Relationship}
         \label{fig:issue_pr_demo_example}
     \end{figure}
 
-    As shown in Fig.~\ref{fig:issue_pr_demo_example}, GitHub issue \#46465, titled ``[C++] [Arrow Flight SQL ODBC] Refactor unnecessary nesting in include folders,'' was resolved by a series of three commits bundled in pull request \#47703. The commits are:
-
+\begin{enumerate}[a)]
+	\item \textbf{Prevailing assumption: one-to-one issue--commit mappings.} Many automated methods are designed and evaluated under the assumption that each issue corresponds to a single commit. This simplifies modeling and evaluation but does not align with real development processes.
+	
+	\item \textbf{Prevalence of one-to-many relationships.} In practical development workflows a single issue—especially complex bugs or multi-step feature work—is often resolved through multiple commits (incremental fixes, follow-ups, or refactors)~\cite{r7,r17}. These one-to-many patterns are common in large and actively maintained projects. As shown in Fig.~\ref{fig:issue_pr_demo_example}, GitHub issue \textbf{\#46465}, titled ``[C++] [Arrow Flight SQL ODBC] Refactor unnecessary nesting in include folders,'' was resolved by a series of three commits bundled in pull request \textbf{\#47703}. The commits (in order of time, earliest first) are:
     \begin{itemize}
-        \item \textit{Refactor odbcabstraction and odbc\_impl}
-        \item \textit{Use \texttt{arrow::flight::sql::odbc} namespace}
-        \item \textit{Combine utils and define utils namespace}
-    \end{itemize}
+        \setlength\itemsep{0pt}
+        \setlength\parskip{0pt}
+        \setlength\topsep{0pt}
+        \item \textit{Commit 1: Refactor odbcabstraction and odbc\_impl}
+        \item \textit{Commit 2: Use \texttt{arrow::flight::sql::odbc} namespace}
+        \item \textit{Commit 3: Combine utils and define utils namespace}
+        \end{itemize}
 
-    The scope of this multi-step refactoring and its volume is shown by the \texttt{Files changed} tab, which indicates these three commits modified a total of 135 files, along with 3,257 additions and 4,100 lines of deletions.
+    The scope of this multi-step refactoring and its volume is shown by the \texttt{Files changed} tab, which indicates these three commits modified a total of 135 files, along with 3,257 lines of additions and 4,100 lines of deletions. This example illustrates the complexity of real-world issue resolution, where multiple coordinated commits are necessary to fully address a single issue.
 
-	\item \textbf{Failure to capture full resolution scope.} By ignoring one-to-many links, current traceability models fail to capture the full history and context of issue resolution. This fragmentation degrades downstream tasks such as debugging, historical analysis, and automated repair, because the complete set of commits that together implement a fix is not recovered~\cite{r6}.
+	\item \textbf{Failure to capture full resolution scope.} By ignoring one-to-many links, current traceability models fail to capture the full history and context of issue resolution. This fragmentation degrades downstream tasks such as debugging, historical analysis, and automated repair, because the complete set of commits that together implement a fix is not recovered~\cite{r7}.
 \end{enumerate}
 
 

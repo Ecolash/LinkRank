@@ -1,9 +1,6 @@
 \section{Objectives}
 
-The main objective of this work is to develop a practical and effective framework for recovering one-to-many issue--commit traceability links. To this end, we present \emph{LinkRank}, a learning-to-rank formulation designed specifically for one-to-many issue--commit linking. In LinkRank each issue is treated as a query and candidate commits are ranked using a compact, interpretable feature blend: lexical similarity (TF--IDF with SVD) and retrieval-focused signals (BM25). Ranking is learned with a LambdaMART model and selection uses an iterative pick--remove--renormalize policy.\\
-
-\noindent
-In summary, this work contributes the following key items:
+The main objective of this work is to develop a practical and effective framework for recovering one-to-many issue--commit traceability links. To this end, we present \emph{LinkRank}, a learning-to-rank formulation designed specifically for one-to-many issue--commit linking. In LinkRank each issue is treated as a query and candidate commits are ranked using a compact, interpretable feature blend: lexical similarity (TF--IDF with SVD) and retrieval-focused signals (BM25). Ranking is learned with a LambdaMART model and selection uses an iterative pick--remove--renormalize policy.In summary, this work contributes the following key items:
 
 \begin{enumerate}
 	\item \textit{One-to-many dataset.} We construct a new dataset by mining GitHub pull requests that are linked to \emph{exactly one} issue and contain \emph{two to six} commits, producing genuine one-to-many relations while avoiding degenerate or outlier cases. Careful filtering and repository-aware negative/false-link construction produce a realistic evaluation corpus and reduce ambiguity from multi-issue PRs.
