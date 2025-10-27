@@ -11,8 +11,8 @@ Table~\ref{rq3} presents the average performance across ten repositories, compar
 
 \begin{table}[htbp]
 \centering
-\caption{Performance (in\%) comparison of LinkRank, LinkRank-C2I, and baselines. }
-\caption*{These values are averaged across all datasets.}
+\caption{Performance (in \%) comparison of LinkRank, LinkRank-C2I, and baselines. }
+\subcaption*{These values are averaged across all datasets.}
 \renewcommand{\arraystretch}{1.2}
 \label{rq3}
 \scriptsize
@@ -74,7 +74,8 @@ Table~\ref{rq2} reports results for both approaches under three selection regime
 
 \begin{table*}[htbp]
 \centering
-\caption{Performance (in \%) of LinkRank and LinkRank-C2I across datasets under three regimes: Known-K, and Unknown-K with ABS and REL.}
+\caption{Performance (in \%) of LinkRank and LinkRank-C2I} 
+\subcaption*{Across 10 datasets under three regimes: Known-K, and Unknown-K with ABS and REL.}
 \renewcommand{\arraystretch}{1.3}
 \label{rq2}
 \begin{tabular}{@{}llcccccc@{}}
@@ -168,7 +169,8 @@ Together, the two formulations validate that a learning-to-rank approach is well
 
 \begin{table*}[htbp]
 \centering
-\caption{Performance (in \%) of LinkRank and LinkRank-C2I with CodeBERT embeddings across datasets under three regimes: Known-$K$, and Unknown-$K$ with ABS and REL.}
+\caption{Performance (in \%) of LinkRank and LinkRank-C2I with CodeBERT embeddings}
+\subcaption*{Across 10 datasets under three regimes: Known-K, and Unknown-K with ABS and REL.}
 \renewcommand{\arraystretch}{1.3}
 \label{rq1}
 \begin{tabular}{@{}llcccccc@{}}
@@ -274,7 +276,7 @@ In the cross-repository experiments, we train LinkRank and LinkRank-C2I on repos
   \centering
   \includegraphics[width=\linewidth]{Figures/LR-java.png}
   \caption{Cross-project performance of \textsc{LinkRank} trained on Java repositories. }
-  \caption*{Panels show per-dataset F\textsubscript{1} under Known-$K$, ABS, and REL regimes.}
+  \subcaption*{Panels show per-dataset F\textsubscript{1} under Known-$K$, ABS, and REL regimes.}
   \label{fig:LR-java}
 \end{figure}
 
@@ -334,7 +336,7 @@ For LinkRank, training on Rust and Go leads to an approximate 5\% decrease in th
   \centering
   \includegraphics[width=\linewidth]{Figures/baseline_java.png}
   \caption{Baseline performance comparison for Java repositories}
-  \caption*{(\textsc{FRLink}, \textsc{DeepLink}, \textsc{HybridLinker}, \textsc{EALink})}
+  \subcaption*{(\textsc{FRLink}, \textsc{DeepLink}, \textsc{HybridLinker}, \textsc{EALink})}
   \label{fig:baseline_java}
 \end{figure}
 
