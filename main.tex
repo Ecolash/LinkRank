@@ -1,5 +1,4 @@
 \documentclass[11pt,english,a4paper]{article}
-%\usepackage{mylay} %User defined
 \usepackage[a4paper,
 left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 \makeatletter
@@ -68,39 +67,17 @@ left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 \usepackage{tabularx}
 
 \newcounter{nodemarkers}
-\newcommand\circletext[1]{%
-	\tikz[overlay,remember picture] 
-	\node (marker-\arabic{nodemarkers}-a) at (0,1ex) {};%
-	#1%
-	\tikz[overlay,remember picture]
-	\node (marker-\arabic{nodemarkers}-b) at (0,0){};%
-	\tikz[overlay,remember picture,inner sep=3pt]
-	\node[draw,ellipse,fit=(marker-\arabic{nodemarkers}-a.center) (marker-\arabic{nodemarkers}-b.center)] {};%
-	\stepcounter{nodemarkers}%
+\newcommand{\preamble}[1]{%
+  \newpage
+  \input{Contents/Preambles/#1.tex}%
 }
-
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-		\node[shape=circle,draw,inner sep=1.5pt] (char) {#1};}}
-
-\newcommand*\rectangle[1]{\tikz[baseline=(char.base)]{
-		\node[shape=rectangle,draw,inner xsep=1pt,inner ysep=0.8pt,align=left, minimum height=1em,] (char) {#1};}}
-\newcolumntype{M}{>{\centering\arraybackslash}m{\dimexpr.25\linewidth-2\tabcolsep}}
-
-
-
 
 \begin{document}
 	\thispagestyle{empty}
-\input{Contents/Preambles/Cover Page.tex}
-
-\newpage
-\input{Contents/Preambles/Declaration.tex}
-
-\newpage
-\input{Contents/Preambles/Certificate.tex}
-
-\newpage
-\input{Contents/Preambles/Abstract.tex}
+    \preamble{Cover Page}
+    \preamble{Declaration}
+    \preamble{Certificate}
+    \preamble{Abstract}
 
 \newpage
 \tableofcontents
