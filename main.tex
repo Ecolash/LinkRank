@@ -77,9 +77,16 @@ left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 % Make only the table of contents use black internal links:
 \AtBeginDocument{%
   \let\oldtableofcontents\tableofcontents
+  \let\oldlistoffigures\listoffigures
+  \let\oldlistoftables\listoftables
+  \let\oldlistofalgorithms\listofalgorithms
   \renewcommand{\tableofcontents}{%
   \hypersetup{linkcolor=black}% TOC entries black
   \oldtableofcontents
+  \newpage
+  \oldlistoffigures
+  \oldlistoftables
+  \oldlistofalgorithms
   \hypersetup{linkcolor=blue}% restore original color for the rest
   }%
 }
@@ -124,12 +131,12 @@ left=0.7in,right=0.7in,top=0.9in,bottom=0.9in]{geometry}
 \newpage
 \tableofcontents
 
-\newpage
-\listoffigures
-\vspace{6pt}
-\listoftables
-\vspace{6pt}
-\listofalgorithms
+% \newpage
+% \listoffigures
+% \vspace{6pt}
+% \listoftables
+% \vspace{6pt}
+% \listofalgorithms
 
 \newpage
 \input{Contents/Introduction.tex}

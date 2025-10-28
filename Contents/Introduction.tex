@@ -6,7 +6,7 @@ Agentic artificial intelligence (AI) represents a transformative leap in AI, evo
 
 \paragraph{Role of Agentic AI in Software Engineering:}
 
-The future of software engineering, SE 3.0, is already unfolding with the rise of AI teammates: autonomous, goal-driven systems that collaborate with human developers in real-world workflows~\cite{arxiv250715003}. The integration of Agentic AI into Software Engineering marks a fundamental paradigm shift. Intelligent agents can now autonomously navigate software repositories, understand development history, and make informed decisions that traditionally required human judgment~\cite{traceability,btlink}. They can perform code review, refactoring, dependency analysis, and link recovery across complex version-controlled systems. In software engineering, this paradigm offers a powerful new method for automating intricate workflows, particularly in the complex, resource-intensive process of bug management, thus accelerating software evolution.
+The future of software engineering, SE 3.0, is already unfolding with the rise of AI teammates: autonomous, goal-driven systems that collaborate with human developers in real-world workflows~\cite{agentic_ai2}. The integration of Agentic AI into Software Engineering marks a fundamental paradigm shift. Intelligent agents can now autonomously navigate software repositories, understand development history, and make informed decisions that traditionally required human judgment~\cite{traceability,btlink}. They can perform code review, refactoring, dependency analysis, and link recovery across complex version-controlled systems. In software engineering, this paradigm offers a powerful new method for automating intricate workflows, particularly in the complex, resource-intensive process of bug management, thus accelerating software evolution.
 
 \subsection{Agentic AI System for Issue Resolution}
 
@@ -17,7 +17,7 @@ Among the many potential applications of Agentic AI in Software Engineering, one
 
     \item \textbf{Explainability:} Providing interpretable reasoning behind each link to enhance trust and support human understanding of software evolution~\cite{r45}. This involves generating natural language explanations that elucidate why specific commits were linked to particular issues, drawing on historical data and contextual information from the repository~\cite{r7}. By making the decision-making process of the traceability agent transparent, we can foster greater confidence in its recommendations and facilitate more effective collaboration between human developers and AI agents.
 
-    \item \textbf{Resolution:} Building an agentic framework that not only identifies and explains links but also proposes candidate fixes or commits based on prior issue–resolution patterns~\cite{r89,r90}. We envision autonomous agents that can suggest code changes, generate patches, or submit fixes to the repository while providing justifications for their actions; prior work such as \textbf{MAGIS}: LLM-Based Multi-Agent Framework for GitHub Issue Resolution illustrates this potential~\cite{magis}.
+    \item \textbf{Resolution:} Building an agentic framework that not only identifies and explains links but also proposes candidate fixes or commits based on prior issue–resolution patterns~\cite{r89,r90}. We envision autonomous agents that can suggest code changes, generate patches, or submit fixes to the repository while providing justifications for their actions; prior work such as \emph{MAGIS} and \emph{ExpeRepair} illustrates this potential of AI agents in bug resolution~\cite{magis,mu2025expeRepair}.
 \end{enumerate}
 
 \noindent
@@ -51,7 +51,7 @@ As shown in Fig.~\ref{fig:er_issue_commit}, each \textit{Issue} entity can be li
 A significant challenge in this area arises from the separation between issue tracking systems (e.g., Bugzilla, GitHub) and version control systems (e.g. Mercurial)~\cite{r1,r2}. The lack of integration between the tools results in incomplete traceability hindering maintenance and analytics. Developers may manually include issue IDs in commit messages, but this practice is often inconsistent and error-prone~\cite{r16,r18}, reducing the ability to analyze software changes and understand the rationale behind them. To fill this gap, we present \textbf{LinkRank}, a learning-to-rank formulation for one-to-many issue-commit linking.\\
 
 \noindent
-The remainder of this paper is structured as follows. Section 3 reviews the related work. Section 5 introduces the proposed \textsc{LinkRank} framework and its variant \textsc{LinkRank-C2I}, detailing the feature design, LambdaMART training, and selection strategies. Section-6 describes the experimental setup and Section-7 presents the results across multiple repositories.
+The remainder of this paper is structured as follows. Section 3 reviews the related work. Section 5 introduces the proposed \emph{LinkRank} framework and its variant \textsc{LinkRank-C2I}, detailing the feature design, LambdaMART training, and selection strategies. Section-6 describes the experimental setup and Section-7 presents the results across multiple repositories.
 
 % \bibliographystyle{IEEEtran}
 % \bibliography{Reference_Cleaned_IEEE}

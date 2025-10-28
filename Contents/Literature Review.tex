@@ -31,7 +31,7 @@ Recent advances leverage deep neural networks and pre-trained transformers to mo
 \subsection{Research Gap in Existing Link-Recovery Methods}
 Despite these advances, most studies continue to model the problem as a \emph{one-to-one binary classification} task. In practice, software issues are often resolved across multiple commits, each addressing partial aspects such as refactoring, testing, or incremental fixes. Existing frameworks, including advanced transformer-based ones, fail to model these \emph{one-to-many relationships}, leading to incomplete traceability.  
 Furthermore, current datasets and evaluation protocols assume a single best commit per issue, reinforcing this oversimplification. The absence of inter-commit relationship modeling also limits downstream tasks such as commit clustering, bug root-cause reasoning, and automated fix generation.  
-Hence, there exists a critical gap: the need for a scalable, explainable, and automation-ready model that captures \textbf{multi-commit traceability} and \textbf{causal link reasoning}.
+Hence, there exists a critical gap: the need for a scalable, explainable, and automation-ready model that captures \emph{multi-commit traceability} and \emph{causal link reasoning}.
 
 \subsection{Explainability in Software Engineering}
 Explainability has emerged as a key pillar of modern software-engineering AI systems. Beyond generating predictions, models must justify their reasoning to support developer trust, auditing, and debugging.  
@@ -42,7 +42,7 @@ Recent explainable approaches incorporate attention visualization, natural-langu
 \subsubsection*{Rise of Agentic AI}
 Agentic AI marks a shift from static large-language-model (LLM) interfaces to autonomous, goal-driven agents capable of planning, acting, and reasoning over extended tasks. These agents possess memory, environmental awareness, and tool-use capabilities. In software engineering, this paradigm enables systems that can autonomously analyze repositories, generate code patches, perform testing, and iteratively improve solutions.\\
 
-Practical, developer-facing systems also reflect this agentic trend. Tools such as GitHub Copilot, Anthropic's Claude (including Claude Code variants), Cursor, and Windsurf provide varying degrees of workspace-aware assistance. While not all of these systems are full multi-step autonomous agents, they illustrate how LLM-powered assistants are being embedded into IDEs and developer workflows, lowering the barrier to broader agentic automation in everyday software maintenance.
+Practical, developer-facing systems also reflect this agentic trend. Tools such as \emph{GitHub Copilot, Anthropic's Claude (including Claude Code variants), Cursor, and Windsurf} provide varying degrees of workspace-aware assistance~\cite{github_copilot,anthropic_claude,cursor_ai,windsurf_ai}. While not all of these systems are full multi-step autonomous agents, they illustrate how LLM-powered assistants are being embedded into IDEs and developer workflows, lowering the barrier to broader agentic automation in everyday software maintenance.
 
 \subsubsection*{Multi-Agent Frameworks in Software Maintenance}
 Multi-agent frameworks coordinate specialized agents to emulate collaborative developer workflows. By dividing responsibilities, such as task decomposition, code generation, review, and validation, these frameworks achieve scalability and robustness. They also naturally support feedback loops that approximate team-based software maintenance processes.
