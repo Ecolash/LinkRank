@@ -285,7 +285,7 @@ if timings:
     tdf = pd.concat([tdf, pd.DataFrame([avg])], ignore_index=True)
     t_out = os.path.join(output_dir, "DeepLink_LSTM_timings.csv")
     tdf.to_csv(t_out, index=False)
-    print("\n=== Train/Test Timings (seconds) — DeepLink (LSTM) ===")
+    print("\n=== Train/Test Timings (seconds) ,  DeepLink (LSTM) ===")
     print(tdf.to_string(index=False))
     print(f"\n✔ Timings saved → {t_out}")
 

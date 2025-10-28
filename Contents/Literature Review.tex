@@ -2,7 +2,7 @@
 
 \subsection{Software Traceability and Automated Link Recovery}
 Software traceability, the process of establishing and maintaining connections between related software artifacts, is fundamental to understanding, evolving, and maintaining complex software systems~[1],~[2]. It enables effective impact analysis~[3], assists in bug fixing and project management~[5], and is critical to ensuring safety in mission-critical domains~[4].  
-A particularly important dimension of traceability is \textbf{issue–commit linking}, which connects issues reported in tracking systems (such as Bugzilla~[9]) to the commits in version control systems (such as Git~[11]) that address them~[6]–[8].\\
+A particularly important dimension of traceability is \emph{issue–commit linking}, which connects issues reported in tracking systems (such as Bugzilla~[9]) to the commits in version control systems (such as Git~[11]) that address them~[6]–[8].\\
 
 While developers can manually reference issue identifiers within commit messages, this practice is inconsistent, leading to missing or incomplete links~[13]. Such gaps obscure the rationale behind code changes and increase maintenance costs~[14]–[16]. Consequently, establishing reliable automated links is vital for downstream research areas such as bug prediction~[17] and commit analysis~[18].  
 Over the past two decades, automated approaches to issue–commit linking have evolved from early rule-based systems~[17],~[19],~[20], to classical machine-learning models~[21]–[25], and more recently to deep learning and transformer-based frameworks~[7],~[26]–[31] that capture deep semantic relationships between textual and code artifacts.
@@ -29,32 +29,32 @@ Recent advances leverage deep neural networks and pre-trained transformers to mo
 \end{itemize}
 
 \subsection{Research Gap in Existing Link-Recovery Methods}
-Despite these advances, most studies continue to model the problem as a \emph{one-to-one binary classification} task. In practice, software issues are often resolved across multiple commits, each addressing partial aspects such as refactoring, testing, or incremental fixes. Existing frameworks—including advanced transformer-based ones—fail to model these \emph{one-to-many relationships}, leading to incomplete traceability.  
+Despite these advances, most studies continue to model the problem as a \emph{one-to-one binary classification} task. In practice, software issues are often resolved across multiple commits, each addressing partial aspects such as refactoring, testing, or incremental fixes. Existing frameworks, including advanced transformer-based ones, fail to model these \emph{one-to-many relationships}, leading to incomplete traceability.  
 Furthermore, current datasets and evaluation protocols assume a single best commit per issue, reinforcing this oversimplification. The absence of inter-commit relationship modeling also limits downstream tasks such as commit clustering, bug root-cause reasoning, and automated fix generation.  
 Hence, there exists a critical gap: the need for a scalable, explainable, and automation-ready model that captures \textbf{multi-commit traceability} and \textbf{causal link reasoning}.
 
 \subsection{Explainability in Software Engineering}
 Explainability has emerged as a key pillar of modern software-engineering AI systems. Beyond generating predictions, models must justify their reasoning to support developer trust, auditing, and debugging.  
-In the context of traceability, explainable models can articulate why a commit is linked to an issue—by citing specific textual or structural evidence—thereby bridging the gap between automated inference and human comprehension.  
+In the context of traceability, explainable models can articulate why a commit is linked to an issue, by citing specific textual or structural evidence, thereby bridging the gap between automated inference and human comprehension.  
 Recent explainable approaches incorporate attention visualization, natural-language rationales, and code summarization to elucidate linking decisions. Such transparency is essential for integrating automated systems into collaborative software environments.
 
 \subsection{Agentic AI for Software Automation}
 \subsubsection*{Rise of Agentic AI}
 Agentic AI marks a shift from static large-language-model (LLM) interfaces to autonomous, goal-driven agents capable of planning, acting, and reasoning over extended tasks. These agents possess memory, environmental awareness, and tool-use capabilities. In software engineering, this paradigm enables systems that can autonomously analyze repositories, generate code patches, perform testing, and iteratively improve solutions.\\
 
-Practical, developer-facing systems also reflect this agentic trend. Tools such as GitHub Copilot, Anthropic's Claude (including Claude Code variants), Cursor, and Windsurf provide varying degrees of workspace-aware assistance — from context-sensitive code completion and intelligent search to higher-level code generation and refactoring suggestions. While not all of these systems are full multi-step autonomous agents, they illustrate how LLM-powered assistants are being embedded into IDEs and developer workflows, lowering the barrier to broader agentic automation in everyday software maintenance.
+Practical, developer-facing systems also reflect this agentic trend. Tools such as GitHub Copilot, Anthropic's Claude (including Claude Code variants), Cursor, and Windsurf provide varying degrees of workspace-aware assistance. While not all of these systems are full multi-step autonomous agents, they illustrate how LLM-powered assistants are being embedded into IDEs and developer workflows, lowering the barrier to broader agentic automation in everyday software maintenance.
 
 \subsubsection*{Multi-Agent Frameworks in Software Maintenance}
-Multi-agent frameworks coordinate specialized agents to emulate collaborative developer workflows. By dividing responsibilities—such as task decomposition, code generation, review, and validation—these frameworks achieve scalability and robustness. They also naturally support feedback loops that approximate team-based software maintenance processes.
+Multi-agent frameworks coordinate specialized agents to emulate collaborative developer workflows. By dividing responsibilities, such as task decomposition, code generation, review, and validation, these frameworks achieve scalability and robustness. They also naturally support feedback loops that approximate team-based software maintenance processes.
 
-\subsection{MAGIS: Multi-Agent GitHub Issue Resolution}
+\subsubsection{MAGIS: Multi-Agent GitHub Issue Resolution}
 \textbf{MAGIS}~\cite{magis} exemplifies the integration of LLM-based agents for end-to-end issue resolution. The framework comprises four primary agents:
 
 \begin{itemize}
-    \item \textbf{Manager Agent} -- Acts as the planner and coordinator: it decomposes a reported issue into concrete subtasks, prioritizes work, and either assigns those tasks to existing Developer agents or dynamically designs a team of Developer agents tailored to the problem. This adaptive team-construction improves flexibility and ensures the right mix of skills is assembled for diverse issues.
-    \item \textbf{Repository Custodian} -- Responsible for efficient context retrieval within large codebases: the custodian locates relevant files, functions, and hunks that pertain to the issue and prepares compact summaries for downstream agents. Because full-repository querying is costly and LLM context windows are limited, the custodian relies on indexing, selective retrieval, and caching to present focused evidence to other agents.
-    \item \textbf{Developer Agents} -- Implement and modify code in a structured, parallelizable workflow: developers generate candidate patches, apply targeted edits, and decompose complex modifications into smaller sub-operations (e.g., generate, refactor, adapt). By separating generation from precise edit application, Developer agents leverage automated code synthesis.
-    \item \textbf{QA Engineer Agent} -- Provides task-specific validation and feedback through reasoning and automated testing, paired with each Developer agent to ensure timely reviews. This focused QA pairing shortens review latency, improves patch quality, and enforces testing prior to integration.
+    \item \textbf{Manager Agent} -- Acts as the planner and coordinator: it decomposes a reported issue into concrete subtasks, prioritizes work, and assigns those tasks to a team of Developer agents.
+    \item \textbf{Repository Custodian} -- Responsible for efficient context retrieval within large codebases: the custodian locates relevant files, functions, and hunks that pertain to the issue and prepares compact summaries for downstream agents.
+    \item \textbf{Developer Agents} -- Implement and modify code in a structured, parallelizable workflow: developers generate candidate patches, apply targeted edits, and decompose complex modifications into smaller sub-operations (e.g., generate, refactor, adapt). 
+    \item \textbf{QA Engineer Agent} -- Provides task-specific validation and feedback through reasoning and automated testing, paired with each Developer agent to ensure timely reviews. 
 \end{itemize}
 
 \begin{figure}[h!]
@@ -70,22 +70,21 @@ MAGIS overcomes three major limitations in prior LLM-based repair systems:
 (3) absence of iterative validation.  
 Evaluated on the SWE-Bench benchmark, MAGIS achieved an accuracy of 13.94\%, representing an eight-fold improvement over baseline GPT-4 performance.
 
+\subsubsection{ExpeRepair: Dual-Memory Enhanced LLM-based Repo-Level Program Repair}
 
+ExpeRepair~\cite{mu2025expeRepair} is a repository-level program repair framework that augments LLM-based repair agents with a dual-memory architecture. Repair work is performed by a Program Repair Module (Test Agent + Patch Agent) which iteratively generates reproduction tests, proposes patches, and validates candidate fixes. After each repair attempt, ExpeRepair records the trajectory (tests, patches, execution feedback) and extracts reusable examples and summarized strategies for future in-context use.
 
-\subsection{Proposed Work}
-This literature review shows that, despite substantial advances in both traceability and agentic code-repair systems, the two areas remain largely disconnected. Traditional link-recovery approaches provide robust traceability but often lack explainability and automation; agentic systems (e.g., MAGIS) enable automated fixing but typically operate without explicit traceability grounding. Bridging these paradigms calls for a unified framework that combines interpretable trace links with automated repair capabilities.\\Accordingly, we propose a threefold objective for future research in agentic software maintenance:
-\begin{enumerate}
-    \item robust \textbf{issue--commit traceability} that explicitly models one-to-many relationships between issues and commits using a learning-to-rank approach;
-    \item \textbf{explainability mechanisms} that justify link predictions by citing the specific parts of an issue addressed by each commit in natural language; and
-    \item \textbf{agentic automation for bug resolution} to propose and, where appropriate, implement fixes guided by traceability evidence and rationales generated by the explainability layer.
-\end{enumerate}
-\begin{center}
-\begingroup
-\setlength{\fboxsep}{6pt}% adjust padding as needed
-\fbox{%
-    \begin{minipage}{\linewidth}
-        \textbf{Scope Statement:} This thesis focuses on and covers the major part of Task 1 only — namely, the design, implementation, and evaluation of explainable, multi-commit issue–commit traceability. Broader concerns such as explainability and multi-agent bug fixing frameworks are discussed as future work.
-    \end{minipage}%
-}
-\endgroup
-\end{center}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{figures/experepair-overview.png}
+    \caption{Architecture of the ExpeRepair: Dual-Memory Enhanced LLM-based Program Repair.}
+    \label{fig:expeRepair_architecture}
+\end{figure}
+
+As shown in Fig.~\ref{fig:expeRepair_architecture}, ExpeRepair maintains two complementary memory stores:  \emph{episodic memory} and \emph{semantic memory}. After the program repair module processes a new issue, the memory module collects the complete repair trajectory, which consists of all detailed artifacts associated with that specific repair instance, including the issue description, reproduction scripts, candidate patches, and the test execution results before and after each patch is applied.\\
+
+\noindent
+Rather than relying on expensive parameter updates, ExpeRepair uses a two-phase workflow: an initial seed phase to populate memories from a curated set of issues, and an inference phase where the agents retrieve top-$k$ demonstrations and applicable insights to enrich prompts and guide generation. This experience-driven prompting enables faster warm-starts, more robust test generation and patching (by reusing prior handling of similar failures), and progressive improvement in repair success rates without model fine-tuning. It achieves state-of-the-art performance among open-source methods, resolving 47.7\% of issues when using Claude 3.5 Sonnet V2.
+
+% \subsection{Proposed Work}
+

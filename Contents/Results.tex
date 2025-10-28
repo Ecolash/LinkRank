@@ -147,21 +147,22 @@ Table~\ref{rq2} reports results for both approaches under three selection regime
 \end{tabular}
 \end{table*}
 
-
+\noindent
 Under \textbf {Unknown-$K$ (ABS)}, LinkRank achieves strong and stable performance across most repositories (e.g., Apache/Superset: F1 = 91.35\%; TensorFlow: 90.85\%; PyTorch: 91.39\%). LinkRank-C2I remains competitive and in some cases surpasses LinkRank (e.g., Apache/Mxnet: 88.98\%; Apache/Dubbo: 83.54\%; Kubernetes: 90.64\%). These results indicate that a global threshold can work well when per-issue score calibration is consistent, with the commit$\rightarrow$issue shortlist occasionally providing additional gains.\\
 
+\noindent
 Under \textbf {Unknown-$K$ (REL)}, LinkRank-C2I generally outperforms LinkRank across repositories. Notable F1 scores include Kubernetes: 87.68\%, Apache/Mxnet: 88.08\%, Apache/Dubbo: 85.79\%, and PyTorch: 85.59\%, with LinkRank-C2I also remaining competitive on others (e.g., Apache/Superset: 83.82\% vs.\ 87.92\% for LinkRank, Apache/Iceberg: 85.40\% vs.\ 89.22\% for LinkRank). This suggests that relative, per-issue thresholding benefits from the bidirectional pipeline, where commit-side shortlist gating helps adapt thresholds more effectively to local project characteristics.\\
 
-
+\noindent
 \textbf{Takeaways:}
 \begin{enumerate}
-    \item \textbf{Known-$K$}: serves as a useful \textbf{upper-bound diagnostic} — it quantifies the \textbf{best-case ranking quality} when the true number of commits per issue is available. However, it is an \textbf{oracle} setting and therefore not practical for deployment.
-        \item \textbf{Unknown-$K$ (overall)}: both \textbf{ABS} and \textbf{REL} produce strong one-to-many recovery across diverse repositories, but they differ in behavior and assumptions:
+    \item \textbf{Known-$K$}: serves as a useful \emph{upper-bound diagnostic} ,  it quantifies the \emph{best-case ranking quality} when the true number of commits per issue is available. However, it is an \emph{oracle} setting and therefore not practical for deployment.
+        \item \textbf{Unknown-$K$ (overall)}: both \emph{ABS} and \emph{REL} produce strong one-to-many recovery across diverse repositories, but they differ in behavior and assumptions:
             \begin{enumerate}
-                \item \textbf{ABS (global absolute threshold)}: yields \textbf{stable, predictable performance} when model scores are consistently calibrated across issues and projects. It is simple to tune on a development set and is computationally cheap at inference.
-                \item \textbf{REL (per-issue relative threshold)}: adapts to \textbf{per-issue score distributions} and better handles heterogeneity (varying numbers of true commits, sparse or noisy issue text). It often improves \textbf{recall} for issues with many relevant commits at the cost of slightly more variance.
+                \item \textbf{ABS (global absolute threshold)}: yields \emph{stable, predictable performance} when model scores are consistently calibrated across issues and projects. It is simple to tune on a development set and is computationally cheap at inference.
+                \item \textbf{REL (per-issue relative threshold)}: adapts to \emph{per-issue score distributions} and better handles heterogeneity (varying numbers of true commits, sparse or noisy issue text). It often improves \textbf{recall} for issues with many relevant commits at the cost of slightly more variance.
             \end{enumerate}
-        \item \textbf{LinkRank vs LinkRank-C2I}: \textbf{LinkRank} provides \textbf{robust, high F1} under \textbf{ABS}; \textbf{LinkRank-C2I} typically shines under \textbf{REL} where the \textbf{commit$\rightarrow$issue shortlist} and \textbf{bidirectional refinement} help adapt thresholds and recover more complex one-to-many relations.
+        \item \textbf{LinkRank vs LinkRank-C2I}: \emph{LinkRank} provides \emph{robust, high F1} under \emph{ABS}; \emph{LinkRank-C2I} typically shines under \emph{REL} where the \emph{commit$\rightarrow$issue shortlist} and \emph{bidirectional refinement} help adapt thresholds and recover more complex one-to-many relations.
 \end{enumerate}
 LinkRank delivers stable, high performance under ABS, while LinkRank-C2I provides a complementary, bidirectional view 
 that often improves results, particularly under REL, without degrading overall robustness. 

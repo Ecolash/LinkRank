@@ -228,7 +228,7 @@ def run_graphql_query(query, variables, rate_limiter, progress, logger, max_retr
 
             if "errors" in result:
                 logger.error(f"GraphQL errors: {result['errors']}")
-                # GraphQL errors are usually not transient — no retry
+                # GraphQL errors are usually not transient ,  no retry
                 raise Exception(f"GraphQL errors: {result['errors']}")
 
             return result

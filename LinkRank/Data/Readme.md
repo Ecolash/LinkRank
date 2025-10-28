@@ -1,4 +1,4 @@
-# LinkRank — Data collection
+# LinkRank ,  Data collection
 
 This folder contains the data collection helper used to build the one-to-many
 issue--commit datasets used by the LinkRank experiments.
@@ -34,6 +34,6 @@ python LinkRank/Data/Dataset.py
 ------
 ### Notes
 
-- The collector respects GitHub rate limits but may still pause between requests — be patient for large runs.
+- The collector respects GitHub rate limits but may still pause between requests ,  be patient for large runs.
 - If you plan to run at scale, consider using multiple tokens and sharding repositories, or export data incrementally.
 

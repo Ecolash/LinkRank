@@ -1,15 +1,18 @@
-\section{Summary of Work Done}
+\section{LinkRank: A Learning-to-Rank Framework for O2M Issue--Commit Traceability}
+% Brief: this section introduces our proposed LINKRANK framework for one-to-many issue--commit traceability, outlining its four main phases: dataset construction, feature representations, learning-to-rank model, and selection strategies.
 
+% \subsection*{The \textsc{LinkRank} framework}
 
-Our approach is organized into four phases. The complete workflow is illustrated in Figure~\ref{fig:approach}. The workflow comprises the following four main phases / steps:
-\begin{enumerate}
-    \setlength{\itemsep}{2pt}
-    \setlength{\parskip}{0pt}
-    \item Dataset construction
-    \item Feature representations
-    \item Learning-to-rank (LambdaMART)
-    \item Selection strategies
-\end{enumerate}
+LinkRank is a learning-to-rank framework designed specifically for one-to-many issue--commit linking. Each issue acts as the query, and candidate commits are scored using a compact blend of lexical signals (TF--IDF + SVD) and retrieval focus (BM25), with ranking performed by a LambdaMART model. Selection proceeds via an \emph{iterative pick--remove--renormalize} loop that supports both Known-$K$ and Unknown-$K$ regimes, where $K$ denotes the true number of commits associated with an issue. We also study a complementary commit$\rightarrow$issue variant, \textit{LinkRank-C2I}, that performs bidirectional refinement. Our approach is organized into four phases. The complete workflow is illustrated in Figure~\ref{fig:approach}. 
+
+% \begin{enumerate}
+%     \setlength{\itemsep}{2pt}
+%     \setlength{\parskip}{0pt}
+%     \item Dataset construction
+%     \item Feature representations
+%     \item Learning-to-rank (LambdaMART)
+%     \item Selection strategies
+% \end{enumerate}
 
 \begin{figure}[h!]
     \centering
@@ -17,9 +20,6 @@ Our approach is organized into four phases. The complete workflow is illustrated
     \caption{Overall workflow of the proposed LINKRANK framework}
     \label{fig:approach}
 \end{figure}
-
-
-
 
 \subsection{Phase I: Dataset construction process}
 
@@ -92,7 +92,7 @@ Table~\ref{tab:repo-langs} summarizes the primary programming languages used in 
 
 % Brief: this subsubsection explains our PR-aware strategy for creating realistic negative samples (false links) that balance positives per-issue while avoiding semantic overlap.
 
-Constructing a reliable set of false links is critical for evaluating issue-commit link recovery models, as it enables a more accurate assessment of the models' ability to distinguish between correctly linked and mismatched issue-commit pairs. However, previous works have often faced challenges in generating false links, which may compromise the quality of the datasets used for model evaluation. Thus, we propose a novel approach for generating false links that addresses these challenges.
+Constructing a reliable set of false links is critical for evaluating issue-commit link recovery models, as it enables a more accurate assessment of the models' ability to distinguish between correctly linked and mismatched issue-commit pairs. However, previous works have often faced challenges in generating false links, which may compromise the quality of the datasets used for model evaluation. Thus, we propose a novel approach for generating false links that addresses these challenges.\\
 
 \noindent
 Several existing studies have relied on simplistic strategies for generating false links, which can lead to inaccuracies. For example, BTLink \cite{btlink} and DeepLink \cite{q1} generated false links by randomly pairing issues and commits from separate projects or unrelated time periods. This approach risks introducing semantically related links that were mistakenly labeled as false, as code changes made in close time proximity or in related repositories may still be connected to the same issue. Similarly, HERMES \cite{hermes} and EALink \cite{ealink} created false links using time-based sampling techniques, where issues and commits were paired if they were not linked within a specific time frame. However, this method overlooks the possibility that complex issue resolutions may involve multiple commits spread over extended periods, potentially leading to the inclusion of valid links being mislabeled as false. Additionally, T-BERT \cite{tbert} generated a large number of false links without verifying their semantic separation from true links, leading to datasets where negative pairs may still be contextually relevant, thus reducing the reliability of the ground truth.\\
@@ -258,11 +258,6 @@ This cross-directional gating enforces agreement between the commit$\rightarrow$
 
 % typically reducing false positives while preserving recall.
 
-\noindent
-\textbf{Selection Strategies.}\ \
-We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, and Unknown-$K$ REL) with the same \emph{iterative} procedure: pick the current best commit for $i$, remove it from $\mathcal{P}(i)$, recompute per-issue normalization (min--max $\tilde{s}$) and the updated $s_{\max}(i)$, and continue until the stopping rule is met. In summary, \textsc{LinkRank-C2I} complements the primary approach by enforcing bidirectional consistency, typically reducing false positives while preserving recall.
-
-
 
 
 \begin{algorithm}[htbp]
@@ -278,14 +273,14 @@ We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, an
 \STATE Train commit$\rightarrow$issue ranker $\mathcal{R}_{\text{C2I}}$ (group by \textbf{Commit ID}) and issue$\rightarrow$commit ranker $\mathcal{R}_{\text{I2C}}$ (group by \textbf{Issue ID})
 
 \vspace{0.25em}
-\STATE \textbf{Stage 1 — Commit$\rightarrow$Issues (shortlist)}
+\STATE \textbf{Stage 1 ,  Commit$\rightarrow$Issues (shortlist)}
 \FORALL{$c\in\mathcal{C}$}
   \STATE $s_{\text{C2I}}(c,i)\gets \mathcal{R}_{\text{C2I}}(x_{c,i})$ for all $i\in\mathcal{I}$
   \STATE shortlist $\mathcal{S}(c)\gets$ top-$K$ issues ranked by $s_{\text{C2I}}$
 \ENDFOR
 
 \vspace{0.25em}
-\STATE \textbf{Stage 2 — Issue$\rightarrow$Commits (final selection)}
+\STATE \textbf{Stage 2 ,  Issue$\rightarrow$Commits (final selection)}
 \FORALL{$i\in\mathcal{I}$}
   \STATE pool $\mathcal{P}(i)\gets \{\,c\in\mathcal{C}: i\in\mathcal{S}(c)\,\}$
   \STATE $s(i,c)\gets \mathcal{R}_{\text{I2C}}(x_{i,c})$ for $c\in\mathcal{P}(i)$
@@ -295,3 +290,9 @@ We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, an
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
+
+\noindent
+\textbf{Selection Strategies.}\ \
+We use the same policies as in \textsc{LinkRank} (Known-$K$, Unknown-$K$ ABS, and Unknown-$K$ REL) with the same \emph{iterative} procedure: pick the current best commit for $i$, remove it from $\mathcal{P}(i)$, recompute per-issue normalization (min--max $\tilde{s}$) and the updated $s_{\max}(i)$, and continue until the stopping rule is met. In summary, \textsc{LinkRank-C2I} complements the primary approach by enforcing bidirectional consistency, typically reducing false positives while preserving recall.
+
+

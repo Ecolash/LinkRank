@@ -67,7 +67,7 @@ All experiments were conducted on a dedicated server equipped with an \textit{NV
 
 \subsection{Evaluation Metrics}
 
-In a one-to-many relationship, an issue may be linked to multiple commits. Evaluating each issue--commit pair independently fails to capture how effectively a model recovers the complete set of commits for an issue. To address this, we adopt an \emph{issue-wise evaluation} strategy: each issue $i$ (identified by its \textit{Issue\_ID}) is treated as a single evaluation unit. For every issue, we compute the confusion matrix components—True Positives ($TP_i$), False Positives ($FP_i$), and False Negatives ($FN_i$)—from which we derive Precision, Recall, and F1-score. The final results are obtained via \emph{macro-averaging}, ensuring that all issues contribute equally regardless of their number of linked commits.
+In a one-to-many relationship, an issue may be linked to multiple commits. Evaluating each issue--commit pair independently fails to capture how effectively a model recovers the complete set of commits for an issue. To address this, we adopt an \emph{issue-wise evaluation} strategy: each issue $i$ (identified by its \textit{Issue\_ID}) is treated as a single evaluation unit. For every issue, we compute the confusion matrix components, True Positives ($TP_i$), False Positives ($FP_i$), and False Negatives ($FN_i$), from which we derive Precision, Recall, and F1-score. The final results are obtained via \emph{macro-averaging}, ensuring that all issues contribute equally regardless of their number of linked commits.
 
 \paragraph{Precision and Recall.}
 Precision quantifies correctness, while Recall measures completeness of retrieved commits for each issue:
@@ -94,7 +94,7 @@ For $\beta = 1$, the F$_1$-score simplifies to:
 \text{F1} = \frac{1}{|I|}\sum_{i \in I}\text{F1}^{(i)}.
 \]
 
-We choose the F1-score because it provides a balanced measure of performance when both false positives (over-linking commits to an issue) and false negatives (missing true links) are equally important. In the issue--commit linking context, over-predicting leads to noisy traceability, while under-predicting omits valid relationships—thus, F1 offers a fair trade-off between precision and recall, capturing the model’s overall linkage accuracy.
+We choose the F1-score because it provides a balanced measure of performance when both false positives (over-linking commits to an issue) and false negatives (missing true links) are equally important. In the issue--commit linking context, over-predicting leads to noisy traceability, while under-predicting omits valid relationships, thus, F1 offers a fair trade-off between precision and recall, capturing the model’s overall linkage accuracy.
 
 
 

@@ -2,19 +2,19 @@
 \section{Motivation}
 
 \subsection{Agentic AI: a new paradigm for repository-scale automation}
-Agentic AI enables models to act autonomously, plan complex tasks, and integrate tools/memory for long-term objectives. In software, these systems monitor development, analyze history, and perform tasks like finding fixes or triaging issues. Unlike simple prompt-driven LLMs, Agentic AI combines perception, retrieval, and iterative decision-making: forming hypotheses, validating them, and refining actions based on feedback. This significantly enhances automation for complex software engineering and bridges issue reporting with code changes.\\
+Agentic AI enables models to act autonomously, plan complex tasks, and integrate tools/memory for long-term objectives. In software, these systems monitor development, analyze history, and perform tasks like finding fixes or triaging issues. Unlike simple prompt-driven LLMs, Agentic AI combines perception, retrieval, and iterative decision-making: forming hypotheses, validating them, and refining actions based on feedback. This significantly enhances automation for complex software engineering and bridges issue reporting with code changes.
 
-\noindent
-By prioritizing traceability, we provide a reliable foundation for higher-level agents (explainers, fix-suggesters, automatic integrators). Ultimately, robust, scalable traceability makes Agentic AI practical for maintenance, automation, and continuous quality assurance in real-world projects.
+% \noindent
+% By prioritizing traceability, we provide a reliable foundation for higher-level agents (explainers, fix-suggesters, automatic integrators). Ultimately, robust, scalable traceability makes Agentic AI practical for maintenance, automation, and continuous quality assurance in real-world projects.
 
 
 \subsection{The core problem: a gap in existing research}
 
-Despite substantial prior work—from early heuristics and IR-based heuristics to modern machine learning and deep models—existing approaches predominantly assume a one-to-one mapping between an issue and a single commit~\cite{r17,r19,r20,r7}. This simplifying assumption overlooks three important realities:
+Despite substantial prior work, from early heuristics and IR-based heuristics to modern machine learning and deep models, existing approaches predominantly assume a one-to-one mapping between an issue and a single commit~\cite{r17,r19,r20,r7}. This simplifying assumption overlooks three important realities:
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.95\textwidth]{Figures/issue-pr-demo-example.png}
+        \includegraphics[width=0.9\textwidth]{Figures/issue-pr-demo-example.png}
         \captionsetup{font={small,it},justification=centering}
         \caption{A Practical Example of a One-to-Many Issue--Commit Relationship}
         \label{fig:issue_pr_demo_example}
@@ -23,7 +23,7 @@ Despite substantial prior work—from early heuristics and IR-based heuristics t
 \begin{enumerate}[a)]
 	\item \textbf{Prevailing assumption: one-to-one issue--commit mappings.} Many automated methods are designed and evaluated under the assumption that each issue corresponds to a single commit. This simplifies modeling and evaluation but does not align with real development processes.
 	
-	\item \textbf{Prevalence of one-to-many relationships.} In practical development workflows a single issue—especially complex bugs or multi-step feature work—is often resolved through multiple commits (incremental fixes, follow-ups, or refactors)~\cite{r7,r17}. These one-to-many patterns are common in large and actively maintained projects. As shown in Fig.~\ref{fig:issue_pr_demo_example}, GitHub issue \textbf{\#46465}, titled ``[C++] [Arrow Flight SQL ODBC] Refactor unnecessary nesting in include folders,'' was resolved by a series of three commits bundled in pull request \textbf{\#47703}. The commits (in order of time, earliest first) are:
+	\item \textbf{Prevalence of one-to-many relationships.} In practical development workflows a single issue, especially complex bugs or multi-step feature work, is often resolved through multiple commits (incremental fixes, follow-ups, or refactors)~\cite{r7,r17}. These one-to-many patterns are common in large and actively maintained projects. As shown in Fig.~\ref{fig:issue_pr_demo_example}, GitHub issue \textbf{\#46465}, titled ``[C++] [Arrow Flight SQL ODBC] Refactor unnecessary nesting in include folders,'' was resolved by a series of three commits bundled in pull request \textbf{\#47703}. The commits (in order of time, earliest first) are:
     \begin{itemize}
         \setlength\itemsep{0pt}
         \setlength\parskip{0pt}

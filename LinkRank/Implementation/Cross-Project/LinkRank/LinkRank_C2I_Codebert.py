@@ -606,7 +606,7 @@ def main():
                 res_df.to_csv(ds_out / f"hybrid_NoK_{tag}.csv", index=False)
                 if dumps:
                     pd.concat(dumps, ignore_index=True).to_csv(ds_out / f"hybrid_NoK_ranked_{tag}.csv", index=False)
-                log.info(f"[{name}] No-K {tag} — P={res_df['Precision'].mean():.4f} R={res_df['Recall'].mean():.4f} F1={res_df['F1'].mean():.4f}")
+                log.info(f"[{name}] No-K {tag} ,  P={res_df['Precision'].mean():.4f} R={res_df['Recall'].mean():.4f} F1={res_df['F1'].mean():.4f}")
                 return res_df
 
             def eval_test_oracleK(tag="OracleK_topK_after_A2BM25"):
@@ -627,7 +627,7 @@ def main():
                 res_df.to_csv(ds_out / f"hybrid_{tag}.csv", index=False)
                 if dumps:
                     pd.concat(dumps, ignore_index=True).to_csv(ds_out / f"hybrid_ranked_{tag}.csv", index=False)
-                log.info(f"[{name}] {tag} — P={res_df['Precision'].mean():.4f} R={res_df['Recall'].mean():.4f} F1={res_df['F1'].mean():.4f}")
+                log.info(f"[{name}] {tag} ,  P={res_df['Precision'].mean():.4f} R={res_df['Recall'].mean():.4f} F1={res_df['F1'].mean():.4f}")
                 return res_df
 
             tag_abs = f"ABSmm_tau{best_abs[1]:.2f}_{TUNE_OBJECTIVE}"

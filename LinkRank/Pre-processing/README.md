@@ -27,8 +27,8 @@ pip install pandas numpy
 
 Open `Pre-processing/pre-process.py` and change the two variables near the top:
 
-- `in_path = Path("Add your path file here")` — set this to the path of your input CSV.
-- `out_path = Path("Add your output path file here")` — set this to where you want the cleaned CSV saved.
+- `in_path = Path("Add your path file here")` ,  set this to the path of your input CSV.
+- `out_path = Path("Add your output path file here")` ,  set this to where you want the cleaned CSV saved.
 
 Example (in the script):
 
@@ -77,4 +77,4 @@ On success you should see:
 If you need changes to the preprocessing rules, update the helper functions in `pre-process.py`:
 - `clean_text`, `clean_file_changes`, `clean_diff`, and `normalize_ws`.
 
-Thank you — this README should help you get started with cleaning your data for LinkRank experiments.
+Thank you ,  this README should help you get started with cleaning your data for LinkRank experiments.
